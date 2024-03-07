@@ -1,19 +1,39 @@
-# taskDisplay.py
+# taskTool.py
 
-from taskTool import *
+tasks = {}  # Dictionnaire pour stocker les tâches
 
-def main():
-    choix = input("Que souhaitez-vous faire? (1: Charger une liste de tâches, 2: Créer une liste de tâches): ")
+def ajouter_tache(id_tache, description):
+    """
+    Ajoute une nouvelle tâche au dictionnaire.
 
-    if choix == "1":
-        nom_fichier = input("Entrez le nom du fichier JSON à charger: ")
-        taches = charger_dictionnaire_json(nom_fichier)
-    elif choix == "2":
-        taches = creer_liste_taches()  # Utilisez la fonction de la partie 2
-        sauvegarder_dictionnaire_json(taches, "nom_de_votre_fichier.json")  # Remplacez par le nom de votre fichier JSON
-        sauvegarder_dictionnaire_json(taches, "nom_de_votre_fichier.json")
-    else:
-        print("Choix invalide.")
+    Args:
+    - id_tache (int): Identifiant unique de la tâche.
+    - description (str): Description de la tâche.
 
-if name == "main":
-    main()
+    Returns:
+    - dict: Dictionnaire mis à jour des tâches.
+    """
+    tasks[id_tache] = {"description": description, "terminee": False}
+    return tasks
+
+def supprimer_tache(id_tache):
+    """
+    Supprime une tâche du dictionnaire.
+
+    Args:
+    - id_tache (int): Identifiant de la tâche à supprimer.
+
+    Returns:
+    - dict: Dictionnaire mis à jour des tâches.
+    """
+    if id_tache in tasks:
+        del tasks[id_tache]
+    return tasks
+
+# Exemple d'utilisation
+ajouter_tache(1, "Faire les courses")
+ajouter_tache(2, "Répondre aux e-mails")
+print(tasks)
+
+supprimer_tache(1)
+print(tasks)
